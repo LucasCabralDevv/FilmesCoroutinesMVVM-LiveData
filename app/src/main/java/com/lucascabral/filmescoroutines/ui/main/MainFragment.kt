@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.lucascabral.filmescoroutines.R
 import kotlinx.android.synthetic.main.main_fragment.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
 
@@ -16,7 +17,7 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -25,12 +26,9 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(
-                this, MainViewModel.MainViewModelFactory(MainRepository())
-        ).get(MainViewModel::class.java)
 
         viewModel.moviesLiveData.observe(viewLifecycleOwner, Observer { movies ->
-            moviesTextView.text = movies[0].title
+            moviesTextView.text = movies[1].title
         })
 
         viewModel.getMoviesCoroutines()
