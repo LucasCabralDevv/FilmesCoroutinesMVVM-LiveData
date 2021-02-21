@@ -1,6 +1,5 @@
 package com.lucascabral.filmescoroutines.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,7 +27,7 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel.moviesLiveData.observe(viewLifecycleOwner, Observer { movies ->
-            moviesTextView.text = movies[1].title
+            moviesTextView.text = movies[0].title
         })
 
         viewModel.getMoviesCoroutines()
